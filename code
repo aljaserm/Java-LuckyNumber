@@ -1,0 +1,80 @@
+package button;
+import javax.swing.*;
+import java.awt.*;
+import java.awt.Color;
+import java.awt.event.*;
+
+public class button extends JFrame
+{
+	
+	public static void main(String[] args)
+	{
+	button frame = new button();
+	frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+	frame.setSize(400,400);
+	frame.setVisible(true);
+	}
+	private JButton jbtblue = new JButton("ENTER NUMBER");
+	private JButton jbtred = new JButton("CHECK IF WINNER");
+	
+//default constructor	
+	public button()
+	{
+		
+		setTitle("TEST ACTIONS");
+		//arrange components
+		getContentPane().setLayout(new FlowLayout());
+		getContentPane().setBackground(Color.WHITE);
+		//add buttons
+		getContentPane().add(jbtblue);
+		getContentPane().add(jbtred);
+		//add a listener object
+		ButtonListener btlisten =new ButtonListener();
+		//register listeners
+		jbtblue.addActionListener(btlisten);
+		jbtred.addActionListener(btlisten);
+		}
+}//end of button class
+
+class ButtonListener implements ActionListener
+{
+	int num = 0,ran=0;
+	
+	//following method will be called when a button is clicked
+	public void actionPerformed(ActionEvent e)
+	{String show;
+		
+	if(e.getActionCommand().equals("ENTER NUMBER"))
+	{
+		String output="PLease Enter a Number Between 1-10 ";
+		String valu =JOptionPane.showInputDialog(null,
+		           output," ",JOptionPane.QUESTION_MESSAGE);
+		           num=Integer.parseInt(valu);	
+		       	ran = (int)Math.round(Math.random()*9)+1;
+		      
+	}
+	else
+		if(e.getActionCommand().equals("CHECK IF WINNER"))	
+		{
+			if(num==ran)
+			{
+				 show=" You are Winner and the numbers are "+num+" and the computer picked "+ran;
+			}
+			else
+			{
+				 show="please try Again";
+			}
+			JOptionPane.showMessageDialog(null,show,"Output:",JOptionPane.INFORMATION_MESSAGE);
+	    }
+		
+	}//end of actionPerformed
+		
+}//end of ButtonListener
+
+
+
+
+
+
+
+
